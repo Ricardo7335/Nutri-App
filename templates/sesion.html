@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block content %}
+<h4>Formulario de registro NutriApp</h4>
+
+<form>
+  <div class="mb-3">
+    <label for="email" class="form-label">¿Cuál es tu email?</label>
+    <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+  </div>
+
+  <div class="mb-3">
+    <label for="password" class="form-label">¿Cuál es tu contraseña?</label>
+    <input type="password" class="form-control" id="password">
+  </div>
+
+  <div class="mb-3">
+    <label for="peso" class="form-label">¿Cuál es tu peso?</label>
+    <input type="number" class="form-control" id="peso" placeholder="En kilogramos">
+  </div>
+
+  <div class="mb-3">
+    <label for="objetivo" class="form-label">¿Qué quieres lograr?</label>
+    <input type="text" class="form-control" id="objetivo" placeholder="Ej. bajar grasa, ganar músculo">
+    <label for="objetivoDetalle" class="form-label">Describe tu meta con más detalle:</label>
+    <textarea class="form-control" id="objetivoDetalle" rows="3"></textarea>
+  </div>
+
+  <div class="mb-3">
+    <label for="edad" class="form-label">¿Qué edad tienes?</label>
+    <input type="number" class="form-control" id="edad">
+    <label for="fechaNacimiento" class="form-label">Selecciona tu fecha de nacimiento:</label>
+    <input type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento">
+  </div>
+
+  <div class="mb-3">
+    <label for="alimentacion" class="form-label">¿Cuál es tu tipo de alimentación?</label>
+    <select class="form-select" id="alimentacion">
+      <option selected disabled>Selecciona una opción</option>
+      <option value="omnivoro">Omnívoro</option>
+      <option value="vegetariano">Vegetariano</option>
+      <option value="vegano">Vegano</option>
+      <option value="flexitariano">Flexitariano</option>
+      <option value="otro">Otro</option>
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label for="alergias" class="form-label">¿Tienes alguna alergia alimentaria?</label>
+    <input type="text" class="form-control" id="alergias" placeholder="Ej. gluten, lácteos, nueces">
+  </div>
+
+  <div class="mb-3">
+    <label for="actividad" class="form-label">¿Cuál es tu nivel de actividad física?</label>
+    <select class="form-select" id="actividad">
+      <option selected disabled>Selecciona una opción</option>
+      <option value="sedentario">Sedentario</option>
+      <option value="ligero">Ligero (1–2 veces por semana)</option>
+      <option value="moderado">Moderado (3–4 veces por semana)</option>
+      <option value="intenso">Intenso (5+ veces por semana)</option>
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label for="altura" class="form-label">¿Cuál es tu altura?</label>
+    <input type="number" class="form-control" id="altura" placeholder="En centímetros">
+  </div>
+
+  <div class="mb-3">
+    <label for="sexo" class="form-label">¿Cuál es tu sexo?</label>
+    <select class="form-select" id="sexo">
+      <option selected disabled>Selecciona una opción</option>
+      <option value="femenino">Femenino</option>
+      <option value="masculino">Masculino</option>
+      <option value="otro">Otro</option>
+    </select>
+  </div>
+
+  <div class="mb-3 form-check">
+    <input type="checkbox" class="form-check-input" id="terminos">
+    <label class="form-check-label" for="terminos">Acepto los términos y condiciones</label>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Enviar</button>
+</form>
+
+{% endblock %}

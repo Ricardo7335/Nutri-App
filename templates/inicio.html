@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="text-center mb-4">
+  <h3 class="fw-bold">Resumen diario</h3>
+  <h1 class="display-5 text-info">1,200 <small class="text-light fs-6">calorías restantes</small></h1>
+</div>
+
+<div class="card bg-secondary mb-4">
+  <div class="card-body d-flex justify-content-around text-center">
+    <div>
+      <i class="bi bi-egg-fried fs-3"></i>
+      <p class="mb-0">Comidas</p>
+      <small>500 cal</small>
+    </div>
+    <div>
+      <i class="bi bi-fire fs-3"></i>
+      <p class="mb-0">Ejercicio</p>
+      <small>300 cal</small>
+    </div>
+    <div>
+      <i class="bi bi-droplet fs-3"></i>
+      <p class="mb-0">Pasos</p>
+      <small>4,500</small>
+    </div>
+    <div>
+      <i class="bi bi-person-standing fs-3"></i>
+      <p class="mb-0">Peso</p>
+      <small>68 kg</small>
+    </div>
+  </div>
+</div>
+
+<div class="text-center mt-4">
+  <button class="btn btn-outline-info w-50">Registrar comida</button>
+</div>
+
+{% endblock %}
