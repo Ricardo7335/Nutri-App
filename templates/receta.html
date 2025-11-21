@@ -2,11 +2,32 @@
 {% block content %}
 <h3 class="mb-4 text-center">Recetas recomendadas para ti 🍽️</h3>
 
+<h2 class="mb-4">Banco de Recetas Saludables</h2>
+<form method="GET" class="row g-3 mb-4">
+  <div class="col-md-3">
+    <select class="form-select" name="dificultad">
+      <option value="">Dificultad</option>
+      <option value="Fácil">Fácil</option>
+      <option value="Media">Media</option>
+    </select>
+  </div>
+  <div class="col-md-3">
+    <select class="form-select" name="nivel">
+      <option value="">Nivel</option>
+      <option value="Principiante">Principiante</option>
+      <option value="Intermedio">Intermedio</option>
+    </select>
+  </div>
+  <div class="col-md-3">
+    <button type="submit" class="btn btn-success w-100">Filtrar</button>
+  </div>
+</form>
 <h5 class="mb-3">Recetas para dieta carnívora </h5>
 <div class="row">
   <div class="col-md-4 mb-4">
     <div class="card bg-secondary text-light h-100">
       <div class="card-body">
+        <img src="{{ url_for('static', filename='img/filete.jpg') }}" class="img-fluid" alt="Descripción de la imagen">
         <h5 class="card-title">Filete a la plancha</h5>
         <p class="card-text">Alto en proteína, ideal para ganar músculo.</p>
         <p><small> 350 calorías |  15 min</small></p>
@@ -17,6 +38,7 @@
   <div class="col-md-4 mb-4">
     <div class="card bg-secondary text-light h-100">
       <div class="card-body">
+        <img src="{{ url_for('static', filename='img/pollo.jpg') }}" class="img-fluid" alt="Descripción de la imagen">
         <h5 class="card-title">Pollo al curry</h5>
         <p class="card-text">Sabroso y saciante, perfecto para almuerzo.</p>
         <p><small>400 calorías |  20 min</small></p>
@@ -27,6 +49,7 @@
   <div class="col-md-4 mb-4">
     <div class="card bg-secondary text-light h-100">
       <div class="card-body">
+        <img src="{{ url_for('static', filename='img/costillas.jpg') }}" class="img-fluid" alt="Descripción de la imagen">
         <h5 class="card-title">Costillas al horno</h5>
         <p class="card-text">Jugosas y llenas de sabor, para una comida fuerte.</p>
         <p><small> 500 calorías | 25 min</small></p>
@@ -41,6 +64,7 @@
   <div class="col-md-4 mb-4">
     <div class="card bg-secondary text-light h-100">
       <div class="card-body">
+        <img src="{{ url_for('static', filename='img/bowl.jpg') }}" class="img-fluid" alt="Descripción de la imagen">
         <h5 class="card-title">Bowl de quinoa y vegetales</h5>
         <p class="card-text">Rico en fibra y proteína vegetal.</p>
         <p><small> 280 calorías |  12 min</small></p>
@@ -51,6 +75,7 @@
   <div class="col-md-4 mb-4">
     <div class="card bg-secondary text-light h-100">
       <div class="card-body">
+        <img src="{{ url_for('static', filename='img/hamburguesa.jpg') }}" class="img-fluid" alt="Descripción de la imagen">
         <h5 class="card-title">Hamburguesa de lentejas</h5>
         <p class="card-text">Alternativa saludable y sin carne.</p>
         <p><small> 300 calorías |  18 min</small></p>
@@ -61,6 +86,7 @@
   <div class="col-md-4 mb-4">
     <div class="card bg-secondary text-light h-100">
       <div class="card-body">
+        <img src="{{ url_for('static', filename='img/pasta.jpg') }}" class="img-fluid" alt="Descripción de la imagen">
         <h5 class="card-title">Pasta con pesto de espinaca</h5>
         <p class="card-text">Deliciosa y sin carne, ideal para la comida.</p>
         <p><small> 320 calorías |  15 min</small></p>
@@ -75,6 +101,7 @@
   <div class="col-md-4 mb-4">
     <div class="card bg-secondary text-light h-100">
       <div class="card-body">
+        <img src="{{ url_for('static', filename='img/crema.jpg') }}" class="img-fluid" alt="Descripción de la imagen">
         <h5 class="card-title">Crema de calabaza</h5>
         <p class="card-text">Suave y sin productos lácteos.</p>
         <p><small> 220 calorías |  10 min</small></p>
@@ -85,6 +112,7 @@
   <div class="col-md-4 mb-4">
     <div class="card bg-secondary text-light h-100">
       <div class="card-body">
+        <img src="{{ url_for('static', filename='img/tostadas.jpg') }}" class="img-fluid" alt="Descripción de la imagen">
         <h5 class="card-title">Tostadas con aguacate</h5>
         <p class="card-text">Ricas en grasas saludables, sin lácteos.</p>
         <p><small> 250 calorías |  5 min</small></p>
@@ -95,6 +123,7 @@
   <div class="col-md-4 mb-4">
     <div class="card bg-secondary text-light h-100">
       <div class="card-body">
+        <img src="{{ url_for('static', filename='img/garbanzos.jpg') }}" class="img-fluid" alt="Descripción de la imagen">
         <h5 class="card-title">Ensalada de garbanzos</h5>
         <p class="card-text">Fresca, sin lácteos y muy nutritiva.</p>
         <p><small>230 calorías |  10 min</small></p>
@@ -109,6 +138,7 @@
   <div class="col-md-4 mb-4">
     <div class="card bg-secondary text-light h-100">
       <div class="card-body">
+        <img src="{{ url_for('static', filename='img/arroz.jpg') }}" class="img-fluid" alt="Descripción de la imagen">
         <h5 class="card-title">Arroz con verduras</h5>
         <p class="card-text">Colorido, nutritivo y libre de gluten.</p>
         <p><small> 270 calorías |  15 min</small></p>
@@ -119,6 +149,7 @@
   <div class="col-md-4 mb-4">
     <div class="card bg-secondary text-light h-100">
       <div class="card-body">
+        <img src="{{ url_for('static', filename='img/tortilla.jpg') }}" class="img-fluid" alt="Descripción de la imagen">
         <h5 class="card-title">Tortilla de papa</h5>
         <p class="card-text">Clásica y sin harinas, ideal para desayuno.</p>
         <p><small>300 calorías | 20 min</small></p>
@@ -129,6 +160,7 @@
   <div class="col-md-4 mb-4">
     <div class="card bg-secondary text-light h-100">
       <div class="card-body">
+        <img src="{{ url_for('static', filename='img/fajitas.jpg') }}" class="img-fluid" alt="Descripción de la imagen">
         <h5 class="card-title">Fajitas de pollo sin tortilla</h5>
         <p class="card-text">Todo el sabor sin gluten, ideal para cenar.</p>
         <p><small> 310 calorías |  15 min</small></p>
@@ -143,6 +175,7 @@
   <div class="col-md-4 mb-4">
     <div class="card bg-secondary text-light h-100">
       <div class="card-body">
+        <img src="{{ url_for('static', filename='img/batido.jpg') }}" class="img-fluid" alt="Descripción de la imagen">
         <h5 class="card-title">Batido de proteína natural</h5>
         <p class="card-text">Con plátano, avena y crema de cacahuate.</p>
         <p><small>350 calorías |  5 min</small></p>
@@ -153,6 +186,7 @@
   <div class="col-md-4 mb-4">
     <div class="card bg-secondary text-light h-100">
       <div class="card-body">
+        <img src="{{ url_for('static', filename='img/espinacas.jpg') }}" class="img-fluid" alt="Descripción de la imagen">
         <h5 class="card-title">Huevos revueltos con espinaca</h5>
         <p class="card-text">Ricos en proteína y hierro.</p>
         <p><small> 280 calorías |  7 min</small></p>
@@ -163,6 +197,7 @@
   <div class="col-md-4 mb-4">
     <div class="card bg-secondary text-light h-100">
       <div class="card-body">
+        <img src="{{ url_for('static', filename='img/pasta-integral.jpg') }}" class="img-fluid" alt="Descripción de la imagen">
         <h5 class="card-title">Pasta integral con pollo</h5>
         <p class="card-text">Energía y proteína para recuperación muscular.</p>
         <p><small> 420 calorías |  20 min</small></p>

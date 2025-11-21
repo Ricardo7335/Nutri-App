@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+  <h2 class="mb-4"> Educación e Información Nutricional</h2>
+
+  <div class="card mb-4">
+    <div class="card-header bg-info text-white">Artículos Educativos</div>
+    <div class="card-body">
+      <div class="mb-3">
+        <h5>¿Cómo leer las etiquetas nutricionales?</h5>
+        <p>Las etiquetas nutricionales ayudan a tomar decisiones informadas. Revisa el tamaño de la porción, calorías, % de valor diario (%VD), y nutrientes clave como grasas, azúcares y fibra. Aprende más en la <a href="https://www.fda.gov/food/nutrition-facts-label/how-understand-and-use-nutrition-facts-label" target="_blank">guía oficial de la FDA</a>.</p>
+      </div>
+
+      <div class="mb-3">
+        <h5> Mitos y verdades sobre las dietas de moda</h5>
+        <p>Las dietas como keto, detox o paleo pueden tener beneficios, pero también riesgos si se siguen sin supervisión. Es clave entender que no hay una dieta única para todos. El conocimiento nutricional mejora con el seguimiento de una dieta, según estudios en España.</p>
+      </div>
+
+      <div class="mb-3">
+        <h5>Guías sobre macronutrientes y su función</h5>
+        <p>Los macronutrientes son esenciales: <strong>proteínas</strong> para reparar tejidos, <strong>carbohidratos</strong> para energía, y <strong>grasas saludables</strong> para funciones hormonales. El equilibrio depende de tu objetivo nutricional.</p>
+      </div>
+
+      <div class="mb-3">
+        <h5>La importancia de la hidratación, la fibra, etc.</h5>
+        <p>Beber suficiente agua mejora la digestión, concentración y energía. La <strong>fibra</strong> regula el tránsito intestinal y ayuda a controlar el colesterol. Incluye frutas, verduras y cereales integrales en tu dieta diaria.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card mb-4">
+    <div class="card-header bg-info text-white">Recursos Descargables</div>
+    <div class="card-body">
+      <p>Descarga materiales para complementar tu nutrición:</p>
+      <ul>
+        <li><a href="/static/planilla_ejercicios.pdf" target="_blank">Planilla de ejercicios básicos (PDF)</a></li>
+        <li><a href="/static/guia_macronutrientes.pdf" target="_blank">Guía de macronutrientes (PDF)</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
