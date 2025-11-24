@@ -25,14 +25,15 @@
                 <label class="form-check-label" for="mujer">Mujer</label>
               </div> 
               <label for="edad" class="form-label">Edad</label>
-              <input type="range" class="form-range" min="14" max="100" value="25" id="edad" name="edad">
               <input type="number" id="edadInput" class="form-control mb-3">
+
               <label for="altura" class="form-label">Altura (cm)</label>
-              <input type="range" class="form-range" min="140" max="210" value="160" id="altura" name="altura">
-              <input type="number" id="alturaInput" class="form-control mb-3">
+              <input type="number" id="alturaInput" class="form-control mb-3" step="0.1">
+
               <label for="peso" class="form-label">Peso (kg)</label>
-              <input type="range" class="form-range" min="30" max="200" value="60" id="peso" name="peso">
-              <input type="number" id="pesoInput" class="form-control mb-3">
+              <input type="number" id="pesoInput" class="form-control mb-3" step="0.1">
+
+
               <label for="actividad" class="form-label">Nivel de actividad</label>
               <select class="form-select mb-3" name="actividad" id="actividad">
                 <option value="1.2">Sedentario</option>
@@ -72,22 +73,5 @@
   </div>
 </div>
 {% endif %}
-
-  <script>
-    const edadInput = document.getElementById('edadInput');
-    const edad = document.getElementById('edad');
-    edadInput.value = edad.value;
-    edad.addEventListener('input', () => edadInput.value = edad.value);
-
-    const alturaInput = document.getElementById('alturaInput');
-    const altura = document.getElementById('altura');
-    alturaInput.value = altura.value;
-    altura.addEventListener('input', () => alturaInput.value = altura.value);
-
-    const pesoInput = document.getElementById('pesoInput');
-    const peso = document.getElementById('peso');
-    pesoInput.value = peso.value;
-    peso.addEventListener('input', () => pesoInput.value = peso.value);
-  </script>
 </body>
 {% endblock %}
