@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+<body class="bg-dark text-light">
+  <section class="py-5 " style="background-color: #5c7aa8;">
+      <div class="container text-center">
+          <h1 class="fw-bold display-5">Bienvenido al Analizador de Platos o Recetas</h1>
+      </div>
+  </section>
+<form method="POST" action="/imc">
+  <div class="container p-4" style="background-color: #0a0f2c"></div>
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-12 col-lg-5">
+          <div class="card w-100 shadow rounded p-4" style="background-color: #ffffff;">
+            <div class="card-body">
+              <div class="row">
+                  <div class="mb-4 col-md-6">
+                    <label for="alturaInput" class="form-label fs-5">Que receta quieres analizar?</label>
+                    <input type="text" id="alturaInput" class="form-control form-control-lg">
+                  </div>
+                <div class="row">
+                  <div class="mb-4 col-md-6">
+                    <label for="alturaInput" class="form-label fs-5">Escribe los ingredientes separados por comas</label>
+                    <input type="text" id="alturaInput" class="form-control form-control-lg">
+                  </div>
+
+                  <div class="mb-4 col-md-6">
+                    <label for="pesoInput" class="form-label fs-5">Quieres que te diga si es vegetariana, vegana, sin gluten, sin lacteos?</label>
+                    <div class="form-check fs-5 mb-3">
+                      <input class="form-check-input" type="radio" name="sexo" id="radioHombre" value="hombre">
+                      <label class="form-check-label" for="radioHombre">si</label>
+                    </div>
+                    <div class="form-check fs-5 mb-4">
+                      <input class="form-check-input" type="radio" name="sexo" id="radioMujer" value="mujer" checked>
+                      <label class="form-check-label" for="radioMujer"> No</label>
+                    </div>
+                  </div>
+                  
+                </div>
+                <button type="submit" class="btn btn-light btn-lg w-100 mt-3">Calcular</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>   
+</form>
+{% endblock %}

@@ -64,6 +64,10 @@ def peso():
 def mn():
     return render_template("macros.html")
 
+@app.route("/an")
+def an():
+    return render_template("analizador.html")
+
 @app.route('/imc', methods=['GET', 'POST'])
 def imc():
     imc = None
