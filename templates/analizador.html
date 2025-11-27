@@ -1,47 +1,75 @@
 {% extends 'base.html' %}
 {% block content %}
 <body class="bg-dark text-light">
-  <section class="py-5 " style="background-color: #5c7aa8;">
-      <div class="container text-center">
-          <h1 class="fw-bold display-5">Bienvenido al Analizador de Platos o Recetas</h1>
-      </div>
+  <section class="py-5" style="background-color: #5c7aa8;">
+    <div class="container text-center">
+      <h1 class="fw-bold display-5">Bienvenido al Analizador de Platos o Recetas</h1>
+    </div>
   </section>
-<form method="POST" action="/imc">
-  <div class="container p-4" style="background-color: #0a0f2c"></div>
+
+  <form method="POST" action="/analizar">
     <div class="container-fluid">
       <div class="row justify-content-center">
         <div class="col-12 col-lg-5">
           <div class="card w-100 shadow rounded p-4" style="background-color: #ffffff;">
             <div class="card-body">
               <div class="row">
-                  <div class="mb-4 col-md-6">
-                    <label for="alturaInput" class="form-label fs-5">Que receta quieres analizar?</label>
-                    <input type="text" id="alturaInput" class="form-control form-control-lg">
-                  </div>
-                <div class="row">
-                  <div class="mb-4 col-md-6">
-                    <label for="alturaInput" class="form-label fs-5">Escribe los ingredientes separados por comas</label>
-                    <input type="text" id="alturaInput" class="form-control form-control-lg">
-                  </div>
-
-                  <div class="mb-4 col-md-6">
-                    <label for="pesoInput" class="form-label fs-5">Quieres que te diga si es vegetariana, vegana, sin gluten, sin lacteos?</label>
-                    <div class="form-check fs-5 mb-3">
-                      <input class="form-check-input" type="radio" name="sexo" id="radioHombre" value="hombre">
-                      <label class="form-check-label" for="radioHombre">si</label>
-                    </div>
-                    <div class="form-check fs-5 mb-4">
-                      <input class="form-check-input" type="radio" name="sexo" id="radioMujer" value="mujer" checked>
-                      <label class="form-check-label" for="radioMujer"> No</label>
-                    </div>
-                  </div>
-                  
+                <div class="mb-4 col-md-6">
+                  <label for="recetaInput" class="form-label fs-5">¿Qué receta quieres analizar?</label>
+                  <input type="text" id="recetaInput" name="receta" class="form-control form-control-lg">
                 </div>
-                <button type="submit" class="btn btn-light btn-lg w-100 mt-3">Calcular</button>
+
+                <div class="mb-4 col-md-6">
+                  <label for="ingredientesInput" class="form-label fs-5">Escribe los ingredientes separados por comas</label>
+                  <input type="text" id="ingredientesInput" name="ingredientes" class="form-control form-control-lg">
+                </div>
+
+                <div class="mb-4 col-md-6">
+                  <label class="form-label fs-5">¿Quieres que te diga si es vegetariana, vegana, sin gluten, sin lácteos?</label>
+                  <div class="form-check fs-5 mb-3">
+                    <input class="form-check-input" type="radio" name="analisis" id="radioSi" value="si">
+                    <label class="form-check-label" for="radioSi">Sí</label>
+                  </div>
+                  <div class="form-check fs-5 mb-4">
+                    <input class="form-check-input" type="radio" name="analisis" id="radioNo" value="no" checked>
+                    <label class="form-check-label" for="radioNo">No</label>
+                  </div>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-light btn-lg w-100 mt-3">Calcular</button>
             </div>
           </div>
         </div>
       </div>
-    </div>   
-</form>
+    </div>
+  </form>
+
+{% if resultado %}
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-5">
+      <div class="card mt-4 shadow" style="background-color: #e6ffe6;">
+        <div class="card-body text-center">
+          <h4 class="card-title text-dark">Resultado</h4>
+          <p class="fs-5 text-dark"><strong>Receta:</strong> {{ resultado.receta }}</p>
+          <p class="fs-5 text-dark"><strong>Vegana:</strong> {{ resultado.es_vegana }}</p>
+          <p class="fs-5 text-dark"><strong>Vegetariana:</strong> {{ resultado.es_vegetariana }}</p>
+          <p class="fs-5 text-dark"><strong>Sin gluten:</strong> {{ resultado.sin_gluten }}</p>
+          <p class="fs-5 text-dark"><strong>Sin lácteos:</strong> {{ resultado.sin_lacteos }}</p>
+
+          <h5 class="mt-3 text-dark">Ingredientes analizados:</h5>
+          <ul class="list-group">
+            {% for ing in resultado.ingredientes %}
+              <li class="list-group-item">
+                {{ ing.nombre }} — Energía: {{ ing.energia }}
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
 {% endblock %}

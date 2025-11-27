@@ -1,14 +1,16 @@
-  {% extends "base.html" %}
-  {% block content %}
-  <h4>Asistente IA</h4>
-  <div class="card bg-secondary text-light mt-3">
-    <div class="card-body" style="height: 300px; overflow-y: auto;">
-      <p><strong>IA:</strong> ¡Hola! ¿En qué puedo ayudarte hoy?</p>
-    </div>
+{% extends "base.html" %}
+{% block content %}
+<h4>Asistente IA</h4>
+<div class="card bg-secondary text-light mt-3">
+  <div class="card-body" style="height: 300px; overflow-y: auto;">
+    {% for autor, mensaje in chat %}
+      <p><strong>{{ autor }}:</strong> {{ mensaje }}</p>
+    {% endfor %}
   </div>
+</div>
 
-  <div class="input-group mt-3">
-    <input type="text" class="form-control" placeholder="Escribe tu pregunta...">
-    <button class="btn btn-primary">Enviar</button>
-  </div>
-  {% endblock %}
+<form method="POST" class="input-group mt-3">
+  <input type="text" name="pregunta" class="form-control" placeholder="Escribe tu pregunta...">
+  <button type="submit" class="btn btn-primary">Enviar</button>
+</form>
+{% endblock %}

@@ -1,27 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
 <h3 class="mb-4 text-center">Recetas recomendadas para ti 🍽️</h3>
-
-<h2 class="mb-4">Banco de Recetas Saludables</h2>
-<form method="GET" class="row g-3 mb-4">
-  <div class="col-md-3">
-    <select class="form-select" name="dificultad">
-      <option value="">Dificultad</option>
-      <option value="Fácil">Fácil</option>
-      <option value="Media">Media</option>
-    </select>
-  </div>
-  <div class="col-md-3">
-    <select class="form-select" name="nivel">
-      <option value="">Nivel</option>
-      <option value="Principiante">Principiante</option>
-      <option value="Intermedio">Intermedio</option>
-    </select>
-  </div>
-  <div class="col-md-3">
-    <button type="submit" class="btn btn-success w-100">Filtrar</button>
-  </div>
-</form>
 <h5 class="mb-3">Recetas para dieta carnívora </h5>
 <div class="row">
   <div class="col-md-4 mb-4">
@@ -207,4 +186,21 @@
   </div>
 </div>
 
+<h2 class="mb-4">Banco de Recetas Saludables</h2>
+
+<div class="row">
+  {% for r in recetas %}
+  <div class="col-md-4 mb-4">
+    <div class="card bg-secondary text-light h-100">
+      <div class="card-body">
+        <img src="{{ url_for('static', filename=r.imagen) }}" class="img-fluid" alt="Imagen de {{ r.nombre }}">
+        <h5 class="card-title">{{ r.nombre }}</h5>
+        <p class="card-text">{{ r.descripcion }}</p>
+        <p><small>{{ r.calorias }} calorías | {{ r.tiempo }}</small></p>
+        <a href="#" class="btn btn-outline-info w-100">Ver receta</a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
 {% endblock %}
