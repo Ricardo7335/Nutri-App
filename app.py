@@ -10,14 +10,6 @@ API_KEY = "sW5cNacxmey8KAmb8zwGF7Lv2lPfBTodv4ewa5dy"
 def inicio():
     return render_template('inicio.html', usuario=session.get('usuario'))
 
-@app.route('/recetas')
-def recetas():
-    return render_template('receta.html')
-
-@app.route('/ejercicios')
-def ejercicios():
-    return render_template('ejercicio.html')
-
 @app.route('/educacion')
 def educacion():
     return render_template('educacion.html')
@@ -42,10 +34,6 @@ def registro():
 def logout():
     session.pop('usuario', None)
     return redirect(url_for('inicio'))
-
-@app.route("/imcc")
-def imcc():
-    return render_template("calculadora-IMC.html")
 
 @app.route("/tbmm")
 def tbmm():
@@ -263,5 +251,120 @@ def ia():
 
     return render_template("ia.html", chat=session["chat"])
 
-if __name__=="__main__":
+recetas = [
+    {"nombre": "Filete a la plancha", "nivel": "principiante", "tipo": "omnivoro",
+     "link": "https://www.recetasgratis.net/receta-de-filete-de-ternera-a-la-plancha-64377.html",
+     "imagen": "static/img/filete.jpg"},
+    {"nombre": "Pollo al curry", "nivel": "intermedio", "tipo": "omnivoro",
+     "link": "https://www.recetasgratis.net/receta-de-pollo-al-curry-facil-64384.html",
+     "imagen": "static/img/pollo.jpg"},
+    {"nombre": "Costillas al horno", "nivel": "chef", "tipo": "omnivoro",
+     "link": "https://www.recetasgratis.net/receta-de-costillas-de-cerdo-al-horno-64382.html",
+     "imagen": "static/img/costillas.jpg"},
+
+    {"nombre": "Bowl de quinoa y vegetales", "nivel": "principiante", "tipo": "vegetariano",
+     "link": "https://www.recetasgratis.net/receta-de-ensalada-de-quinoa-con-verduras-64381.html",
+     "imagen": "static/img/bowl.jpg"},
+    {"nombre": "Hamburguesa de lentejas", "nivel": "intermedio", "tipo": "vegetariano",
+     "link": "https://www.recetasgratis.net/receta-de-hamburguesa-de-lentejas-64380.html",
+     "imagen": "static/img/hamburguesa.jpg"},
+    {"nombre": "Pasta con pesto de espinaca", "nivel": "chef", "tipo": "vegetariano",
+     "link": "https://www.recetasgratis.net/receta-de-pasta-con-pesto-de-espinacas-64379.html",
+     "imagen": "static/img/pasta.jpg"},
+
+    {"nombre": "Crema de calabaza", "nivel": "principiante", "tipo": "vegano",
+     "link": "https://www.recetasgratis.net/receta-de-crema-de-calabaza-64378.html",
+     "imagen": "static/img/crema.jpg"},
+    {"nombre": "Tostadas con aguacate", "nivel": "principiante", "tipo": "vegano",
+     "link": "https://danzadefogones.com/tostadas-de-aguacate/",
+     "imagen": "static/img/tostadas.jpg"},
+    {"nombre": "Ensalada de garbanzos", "nivel": "intermedio", "tipo": "vegano",
+     "link": "https://comedera.com/receta-ensalada-de-garbanzos/",
+     "imagen": "static/img/garbanzos.jpg"},
+
+    {"nombre": "Arroz con verduras", "nivel": "principiante", "tipo": "flexitariano",
+     "link": "https://recetasdecocina.elmundo.es/2021/06/arroz-con-verduras-receta-sana.html",
+     "imagen": "static/img/arroz.jpg"},
+    {"nombre": "Tortilla de papa", "nivel": "intermedio", "tipo": "vegetariano",
+     "link": "https://www.paulinacocina.net/tortilla-de-papas-espanola/10476",
+     "imagen": "static/img/tortilla.jpg"},
+    {"nombre": "Fajitas de pollo sin tortilla", "nivel": "chef", "tipo": "omnivoro",
+     "link": "https://www.tengounhornoysecomousarlo.com/2012/05/fajitas-de-pollo-sin-tortilla.html?m=1",
+     "imagen": "static/img/fajitas.jpg"},
+
+    {"nombre": "Batido de proteína natural", "nivel": "principiante", "tipo": "flexitariano",
+     "link": "https://www.mundodeportivo.com/uncomo/deporte/articulo/6-batidos-de-proteinas-caseros-para-aumentar-masa-muscular-45400.html",
+     "imagen": "static/img/batido.jpg"},
+    {"nombre": "Huevos revueltos con espinaca", "nivel": "intermedio", "tipo": "omnivoro",
+     "link": "https://www.recetasgratis.net/receta-de-revuelto-de-espinacas-con-huevo-64796.html",
+     "imagen": "static/img/espinacas.jpg"},
+    {"nombre": "Pasta integral con pollo", "nivel": "chef", "tipo": "omnivoro",
+     "link": "https://easyrecetas.com/receta/pasta-integral-con-pollo/",
+     "imagen": "static/img/pasta-integral.jpg"}
+]
+
+
+@app.route("/rc", methods=["GET"])
+def recetas_view():
+    nivel = request.args.get("nivel")
+    tipo = request.args.get("tipo")
+
+    filtradas = recetas
+    if nivel and nivel != "":
+        filtradas = [r for r in filtradas if r["nivel"] == nivel]
+    if tipo and tipo != "":
+        filtradas = [r for r in filtradas if r["tipo"] == tipo]
+
+    return render_template("receta.html", recetas=filtradas)
+
+ejercicios = [
+    {"nombre": "Sentadillas", "descripcion": "3 series de 15 repeticiones",
+     "imagen": "static/img/sentadilla.webp", "link": "https://www.youtube.com/watch?v=aclHkVaku9U", "objetivo": "ganar"},
+    {"nombre": "Plancha", "descripcion": "3 series de 30 segundos",
+     "imagen": "static/img/plancha.webp", "link": "https://www.youtube.com/watch?v=pSHjTRCQxIw", "objetivo": "bajar"},
+    {"nombre": "Abdominales bicicleta", "descripcion": "3 series de 20 repeticiones",
+     "imagen": "static/img/abdominales.webp", "link": "https://www.youtube.com/watch?v=9FGilxCbdz8", "objetivo": "bajar"},
+    {"nombre": "Puente de glúteos", "descripcion": "3 series de 20 repeticiones",
+     "imagen": "static/img/gluteos.webp", "link": "https://www.youtube.com/watch?v=1f8yoFFdkcY", "objetivo": "ganar"},
+    {"nombre": "Jumping Jacks", "descripcion": "3 series de 1 minuto",
+     "imagen": "static/img/jumping.webp", "link": "https://www.youtube.com/watch?v=c4DAnQ6DtF8", "objetivo": "bajar"},
+    {"nombre": "Zancadas", "descripcion": "3 series de 12 por pierna",
+     "imagen": "static/img/zancadas.webp", "link": "https://www.youtube.com/watch?v=wrwwXE_x-pQ", "objetivo": "ganar"},
+    {"nombre": "Crunch clásico", "descripcion": "3 series de 20 repeticiones",
+     "imagen": "static/img/crunch.webp", "link": "https://www.youtube.com/watch?v=Xyd_fa5zoEU", "objetivo": "bajar"},
+    {"nombre": "Elevación de piernas", "descripcion": "3 series de 15 repeticiones",
+     "imagen": "static/img/elevacion.webp", "link": "https://www.youtube.com/watch?v=JB2oyawG9KI", "objetivo": "bajar"},
+    {"nombre": "Russian twists", "descripcion": "3 series de 20 giros",
+     "imagen": "static/img/russian.webp", "link": "https://www.youtube.com/watch?v=wkD8rjkodUI", "objetivo": "bajar"},
+    {"nombre": "Correr", "descripcion": "20 minutos",
+     "imagen": "static/img/correr.webp", "link": "https://www.youtube.com/watch?v=Qd4x8xJzK0g", "objetivo": "bajar"},
+    {"nombre": "Piernas + Cardio", "descripcion": "1–3 series según tu nivel",
+     "imagen": "static/img/cardio.webp", "link": "https://www.youtube.com/watch?v=ml6cT4AZdqI", "objetivo": "bajar"},
+    {"nombre": "Flexiones", "descripcion": "3 series de 10–15 repeticiones",
+     "imagen": "static/img/flexion.jpg", "link": "https://www.youtube.com/watch?v=IODxDxX7oi4", "objetivo": "ganar"},
+    {"nombre": "Escaladores", "descripcion": "3 series de 30 segundos",
+     "imagen": "static/img/escaladores.webp", "link": "https://www.youtube.com/watch?v=nmwgirgXLYM", "objetivo": "bajar"},
+    {"nombre": "Plancha con toque de hombros", "descripcion": "3 series de 30 segundos",
+     "imagen": "static/img/hombros.webp", "link": "https://www.youtube.com/watch?v=DJQGX2J4IVw", "objetivo": "bajar"},
+    {"nombre": "Sentadilla con salto", "descripcion": "3 series de 12 repeticiones",
+     "imagen": "static/img/salto.webp", "link": "https://www.youtube.com/watch?v=U3HlEF_E9fo", "objetivo": "ganar"},
+    {"nombre": "Fondos de tríceps", "descripcion": "3 series de 15 repeticiones",
+     "imagen": "static/img/triceps.webp", "link": "https://www.youtube.com/watch?v=0326dy_-CzM", "objetivo": "ganar"},
+    {"nombre": "Superman", "descripcion": "3 series de 30 segundos",
+     "imagen": "static/img/superman.webp", "link": "https://www.youtube.com/watch?v=z6PJ6Zk8y8g", "objetivo": "ganar"},
+    {"nombre": "Crunch en V", "descripcion": "3 series de 15 repeticiones",
+     "imagen": "static/img/crunch-v.webp", "link": "https://www.youtube.com/watch?v=WSu-wci9uTo", "objetivo": "ganar"}
+]
+
+@app.route("/ejercicio", methods=["GET"])
+def ejercicio_view():
+    objetivo = request.args.get("objetivo")
+
+    filtrados = ejercicios
+    if objetivo and objetivo != "":
+        filtrados = [e for e in filtrados if e["objetivo"] == objetivo]
+
+    return render_template("ejercicio.html", ejercicios=filtrados)
+
+if __name__ == "__main__":
     app.run(debug=True)

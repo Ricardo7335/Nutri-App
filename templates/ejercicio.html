@@ -1,198 +1,36 @@
 {% extends "base.html" %}
 {% block content %}
-<h4>Ejercicios recomendados</h4>
 
-<h2>ejercicios para mujeres</h2>
-<div class="row mt-3">
-  <div class="col-md-4 mb-3">
-    <div class="card bg-secondary text-light">
-      <div class="card-body">
-        <img src="{{ url_for('static', filename='img/sentadilla.webp') }}" class="img-fluid" alt="Descripción de la imagen">
-        <h5>Sentadillas</h5>
-        <p>3 series de 15 repeticiones</p>
-      </div>
-    </div>
-  </div>
-  
-  <div class="col-md-4 mb-3">
-    <div class="card bg-secondary text-light">
-      <div class="card-body">
-        <img src="{{ url_for('static', filename='img/plancha.webp') }}" class="img-fluid" alt="Descripción de la imagen">
-        <h5>Plancha</h5>
-        <p>3 series de 30 segundos</p>
-      </div>
-    </div>
-  </div>
-  
-  <div class="col-md-4 mb-3">
-    <div class="card bg-secondary text-light">
-      <div class="card-body">
-        <img src="{{ url_for('static', filename='img/abdominales.webp') }}" class="img-fluid" alt="Descripción de la imagen">
-        <h5>Abdominales bicicleta</h5>
-        <p>3 series de 20 repeticiones</p>
-      </div>
-    </div>
-  </div>
-</div>
+<h3 class="mb-4 text-center">Ejercicios recomendados 💪</h3>
 
-<div class="row mt-3">
-  <div class="col-md-4 mb-3">
-    <div class="card bg-secondary text-light">
-      <div class="card-body">
-        <img src="{{ url_for('static', filename='img/gluteos.webp') }}" class="img-fluid" alt="Descripción de la imagen">
-        <h5>Puente de glúteos</h5>
-        <p>3 series de 20 repeticiones</p>
-      </div>
-    </div>
+<form method="GET" action="{{ url_for('ejercicio_view') }}" class="row mb-4">
+  <div class="col-md-6">
+    <label for="objetivo" class="form-label">Objetivo</label>
+    <select id="objetivo" name="objetivo" class="form-select">
+      <option value="">Todos</option>
+      <option value="bajar">Bajar de peso</option>
+      <option value="subir">Subir de peso</option>
+      <option value="ganar">Ganar músculo</option>
+    </select>
   </div>
-  
-  <div class="col-md-4 mb-3">
-    <div class="card bg-secondary text-light">
-      <div class="card-body">
-        <img src="{{ url_for('static', filename='img/jumping.webp') }}" class="img-fluid" alt="Descripción de la imagen">
-        <h5>Jumping Jacks</h5>
-        <p>3 series de 1 minuto</p>
-      </div>
-    </div>
+  <div class="col-12 mt-3">
+    <button type="submit" class="btn btn-info w-100">Filtrar ejercicios</button>
   </div>
-  
-  <div class="col-md-4 mb-3">
-    <div class="card bg-secondary text-light">
-      <div class="card-body">
-        <img src="{{ url_for('static', filename='img/zancadas.webp') }}" class="img-fluid" alt="Descripción de la imagen">
-        <h5>Zancadas</h5>
-        <p>3 series de 12 por pierna</p>
-      </div>
-    </div>
-  </div>
-</div>
+</form>
 
-<div class="row mt-3">
-  <div class="col-md-4 mb-3">
-    <div class="card bg-secondary text-light">
+<div class="row">
+  {% for ejercicio in ejercicios %}
+  <div class="col-md-4 mb-4">
+    <div class="card bg-secondary text-light h-100">
+      <img src="{{ ejercicio.imagen }}" class="card-img-top" alt="{{ ejercicio.nombre }}">
       <div class="card-body">
-        <img src="{{ url_for('static', filename='img/crunch.webp') }}" class="img-fluid" alt="Descripción de la imagen">
-        <h5>Crunch clásico</h5>
-        <p>3 series de 20 repeticiones</p>
+        <h5 class="card-title">{{ ejercicio.nombre }}</h5>
+        <p>{{ ejercicio.descripcion }}</p>
+        <a href="{{ ejercicio.link }}" target="_blank" class="btn btn-outline-info w-100">Ver ejercicio</a>
       </div>
     </div>
   </div>
-  
-  <div class="col-md-4 mb-3">
-    <div class="card bg-secondary text-light">
-      <div class="card-body">
-        <img src="{{ url_for('static', filename='img/elevacion.webp') }}" class="img-fluid" alt="Descripción de la imagen">
-        <h5>Elevación de piernas</h5>
-        <p>3 series de 15 repeticiones</p>
-      </div>
-    </div>
-  </div>
-  
-  <div class="col-md-4 mb-3">
-    <div class="card bg-secondary text-light">
-      <div class="card-body">
-        <img src="{{ url_for('static', filename='img/russian.webp') }}" class="img-fluid" alt="Descripción de la imagen">
-        <h5>Russian twists</h5>
-        <p>3 series de 20 giros</p>
-      </div>
-    </div>
-  </div>
-</div>
-<h2>ejercicios para hombres</h2>
-<div class="row mt-3">
-  <div class="col-md-4 mb-3">
-    <div class="card bg-secondary text-light">
-      <div class="card-body">
-        <img src="{{ url_for('static', filename='img/correr.webp') }}" class="img-fluid" alt="Descripción de la imagen">
-        <h5>Correr</h5>
-        <p>20 minutos</p>
-      </div>
-    </div>
-  </div>
-  
-  <div class="col-md-4 mb-3">
-    <div class="card bg-secondary text-light">
-      <div class="card-body">
-        <img src="{{ url_for('static', filename='img/cardio.webp') }}" class="img-fluid" alt="Descripción de la imagen">
-        <h5>Piernas + Cardio</h5>
-        <p>1–3 series según tu nivel</p>
-      </div>
-    </div>
-  </div>
-  
-  <div class="col-md-4 mb-3">
-    <div class="card bg-secondary text-light">
-      <div class="card-body">
-        <img src="{{ url_for('static', filename='img/flexion.jpg') }}" class="img-fluid" alt="Descripción de la imagen">
-        <h5>Flexiones</h5>
-        <p>3 series de 10–15 repeticiones</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="row mt-3">
-  <div class="col-md-4 mb-3">
-    <div class="card bg-secondary text-light">
-      <div class="card-body">
-        <img src="{{ url_for('static', filename='img/escaladores.webp') }}" class="img-fluid" alt="Descripción de la imagen">
-        <h5>Escaladores</h5>
-        <p>3 series de 30 segundos</p>
-      </div>
-    </div>
-  </div>
-  
-  <div class="col-md-4 mb-3">
-    <div class="card bg-secondary text-light">
-      <div class="card-body">
-        <img src="{{ url_for('static', filename='img/hombros.webp') }}" class="img-fluid" alt="Descripción de la imagen">
-        <h5>Plancha con toque de hombros</h5>
-        <p>3 series de 30 segundos</p>
-      </div>
-    </div>
-  </div>
-  
-  <div class="col-md-4 mb-3">
-    <div class="card bg-secondary text-light">
-      <div class="card-body">
-        <img src="{{ url_for('static', filename='img/salto.webp') }}" class="img-fluid" alt="Descripción de la imagen">
-        <h5>Sentadilla con salto</h5>
-        <p>3 series de 12 repeticiones</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="row mt-3">
-  <div class="col-md-4 mb-3">
-    <div class="card bg-secondary text-light">
-      <div class="card-body">
-        <img src="{{ url_for('static', filename='img/triceps.webp') }}" class="img-fluid" alt="Descripción de la imagen">
-        <h5>Fondos de tríceps</h5>
-        <p>3 series de 15 repeticiones</p>
-      </div>
-    </div>
-  </div>
-  
-  <div class="col-md-4 mb-3">
-    <div class="card bg-secondary text-light">
-      <div class="card-body">
-        <img src="{{ url_for('static', filename='img/superman.webp') }}" class="img-fluid" alt="Descripción de la imagen">
-        <h5>Superman</h5>
-        <p>3 series de 30 segundos</p>
-      </div>
-    </div>
-  </div>
-  
-  <div class="col-md-4 mb-3">
-    <div class="card bg-secondary text-light">
-      <div class="card-body">
-        <img src="{{ url_for('static', filename='img/crunch-v.webp') }}" class="img-fluid" alt="Descripción de la imagen">
-        <h5>Crunch en V</h5>
-        <p>3 series de 15 repeticiones</p>
-      </div>
-    </div>
-  </div>
+  {% endfor %}
 </div>
 
 {% endblock %}
