@@ -14,6 +14,10 @@ def inicio():
 def educacion():
     return render_template('educacion.html')
 
+@app.route("/calculadoras")
+def calculadoras():
+    return render_template("calculadoras.html")
+
 
 @app.route('/planificacion')
 def planificacion():
