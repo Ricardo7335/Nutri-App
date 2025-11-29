@@ -29,9 +29,24 @@ def sesion():
 @app.route('/registro', methods=['GET', 'POST'])
 def registro():
     if request.method == 'POST':
-        session['usuario'] = request.form['nombre']
+        nombre = request.form['nombre']
+        email = request.form['email']
+        password = request.form['password']
+        session['usuario'] = nombre
         return redirect(url_for('inicio'))
     return render_template('sesion.html')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        nombre = request.form['nombre']
+        password = request.form['password']
+        if nombre and password:
+            session['usuario'] = nombre
+            return redirect(url_for('inicio'))
+        else:
+            flash("Usuario o contraseña incorrectos")
+    return render_template('iniciar-sesion.html')
 
 @app.route('/logout')
 def logout():
@@ -65,14 +80,20 @@ def imc():
 
         if imc < 18.5:
             mensaje = 'Bajo peso'
+            rango= "Menos de 18.5"
         elif imc < 25:
             mensaje = 'Peso saludable'
+            rango= "Entre 18.5 y 24.9"
         elif imc < 30:
             mensaje = 'Sobrepeso'
+            rango= "Entre 25 y 29.9"
         else:
             mensaje = 'Obesidad'
+            rango= "Entre 30 o mas"
 
-    return render_template('calculadora-IMC.html', imc=imc, mensaje=mensaje)
+        return render_template('calculadora-IMC.html', imc=imc, mensaje=mensaje, rango=rango)
+    return render_template('calculadora-IMC.html')
+
 
 @app.route('/gct', methods=['GET', 'POST'])
 def gct():

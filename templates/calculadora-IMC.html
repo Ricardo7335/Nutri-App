@@ -20,8 +20,7 @@
             class="card w-100 shadow rounded p-4"
             style="background-color: #ffffff"
           >
-            <div class="card-body">
-              <label for="alturaInput" class="form-label fs-5">sexo*</label>
+
               
               
               <div class="row">
@@ -80,6 +79,34 @@
               Tu IMC es: <strong>{{ imc }}</strong>
             </p>
             <p class="fs-5 text-secondary">{{ mensaje }}</p>
+            <p class="fs-6 text-dark">Rango de referencia: {{ rango }}</p>
+            <div class="container mt-3">
+  <div class="bg-light p-2 fw-bold d-flex justify-content-between">
+    <span>Categoría</span>
+    <span>Rango de IMC</span>
+  </div>
+
+  <div class="border p-2 d-flex justify-content-between">
+    <span>Bajo peso</span>
+    <span>&lt; 18.5</span>
+  </div>
+
+  <div class="border p-2 d-flex justify-content-between">
+    <span>Peso normal</span>
+    <span>18.5 – 24.9</span>
+  </div>
+
+  <div class="border p-2 d-flex justify-content-between">
+    <span>Sobrepeso</span>
+    <span>25 – 29.9</span>
+  </div>
+
+  <div class="border p-2 d-flex justify-content-between">
+    <span>Obesidad</span>
+    <span>≥ 30</span>
+  </div>
+</div>
+
           </div>
         </div>
       </div>
