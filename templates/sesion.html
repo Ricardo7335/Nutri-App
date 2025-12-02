@@ -85,7 +85,11 @@
     <label class="form-check-label" for="terminos">Acepto los términos y condiciones</label>
   </div>
 
-  <button type="submit" class="btn btn-primary">Enviar</button>
+  <div class="d-flex justify-content-between">
+    <button type="submit" class="btn btn-primary">Enviar</button>
+    <a href="{{ url_for('login') }}" class="btn btn-success">Iniciar sesión</a>
+  </div>
 </form>
+
 
 {% endblock %}

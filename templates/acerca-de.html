@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-5 text-center">
+  <h2 class="mb-4">Acerca de Nosotros</h2>
+
+  <div class="row justify-content-center">
+    <div class="col-md-4 mb-4">
+      <img src="{{ url_for('static', filename='img/vanessa.jpg') }}" 
+           alt="Foto Persona 1" class="rounded-circle img-fluid mb-3" style="width:200px; height:200px;">
+      <h4>Lopez Vanessa</h4>
+      <p class="text-light">Co-creador de NutriApp</p>
+    </div>
+
+    <div class="col-md-4 mb-4">
+      <img src="{{ url_for('static', filename='img/ricardo.jpg') }}" 
+           alt="Foto Persona 2" class="rounded-circle img-fluid mb-3" style="width:200px; height:200px;">
+      <h4>Rosal Ricardo</h4>
+      <p class="text-light">Co-creador de NutriApp</p>
+    </div>
+  </div>
+
+  <hr class="my-4">
+  <div class="mt-4">
+    <h3>¿Por qué hicimos esto?</h3>
+    <p>
+      Creamos NutriApp porque creemos que la salud y el bienestar deben estar al alcance de todos.
+      Queremos ofrecer herramientas simples y prácticas para que cualquier persona pueda mejorar
+      su alimentación y su rutina de ejercicio sin complicaciones.
+    </p>
+  </div>
+  <div class="mt-4">
+    <h3>Contáctanos</h3>
+    <p>Si tienes dudas, sugerencias o quieres colaborar con nosotros, puedes escribirnos:</p>
+    <ul class="list-unstyled">
+      <li><i class="bi bi-envelope"></i> Email: <a href="mailto:contacto@nutriapp.com">nutriapp.7335@gmail.com</a></li>
+      <li><i class="bi bi-instagram"></i> Instagram: <a href="https://instagram.com/nutriapp" target="_blank">@nutriapp</a></li>
+      <li><i class="bi bi-facebook"></i> Facebook: <a href="https://facebook.com/nutriapp" target="_blank">NutriApp</a></li>
+    </ul>
+  </div>
+</div>
+
+{% endblock %}

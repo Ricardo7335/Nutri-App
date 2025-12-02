@@ -12,16 +12,22 @@ def inicio():
 
 @app.route('/educacion')
 def educacion():
-    return render_template('educacion.html')
+    if "usuario" not in session:
+        flash("Debes iniciar sesión para acceder a Educación")
+        return redirect(url_for("login"))
+    return render_template('educacion.html', usuario=session.get('usuario'))
 
 @app.route("/calculadoras")
 def calculadoras():
-    return render_template("calculadoras.html")
-
+    return render_template("calculadoras.html", usuario=session.get("usuario"))
 
 @app.route('/planificacion')
 def planificacion():
     return render_template('planificacion.html')
+
+@app.route("/acerca")
+def acerca_de():
+    return render_template("acerca-de.html")
 
 @app.route('/sesion')
 def sesion():
@@ -30,9 +36,24 @@ def sesion():
 @app.route('/registro', methods=['GET', 'POST'])
 def registro():
     if request.method == 'POST':
-        session['usuario'] = request.form['nombre']
+        nombre = request.form['nombre']
+        email = request.form['email']
+        password = request.form['password']
+        session['usuario'] = nombre
         return redirect(url_for('inicio'))
     return render_template('sesion.html')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        nombre = request.form['nombre']
+        password = request.form['password']
+        if nombre and password:
+            session['usuario'] = nombre
+            return redirect(url_for('inicio'))
+        else:
+            flash("Usuario o contraseña incorrectos")
+    return render_template('iniciar-sesion.html')
 
 @app.route('/logout')
 def logout():
@@ -66,14 +87,20 @@ def imc():
 
         if imc < 18.5:
             mensaje = 'Bajo peso'
+            rango= "Menos de 18.5"
         elif imc < 25:
             mensaje = 'Peso saludable'
+            rango= "Entre 18.5 y 24.9"
         elif imc < 30:
             mensaje = 'Sobrepeso'
+            rango= "Entre 25 y 29.9"
         else:
             mensaje = 'Obesidad'
+            rango= "Entre 30 o mas"
 
-    return render_template('calculadora-IMC.html', imc=imc, mensaje=mensaje)
+        return render_template('calculadora-IMC.html', imc=imc, mensaje=mensaje, rango=rango)
+    return render_template('calculadora-IMC.html')
+
 
 @app.route('/gct', methods=['GET', 'POST'])
 def gct():
@@ -91,7 +118,11 @@ def gct():
                 geb = 10 * peso + 6.25 * altura - 5 * edad - 161
 
             gct = round(geb * 1.5) 
-            resultado = f"Tu Gasto Calórico Total estimado es {gct} kcal/día"
+            resultado = (
+                f"Tu Gasto Calórico Total estimado es {gct} kcal/día. "
+                f"Esto significa la cantidad aproximada de calorías que tu cuerpo necesita al día "
+                f"para mantener tu peso actual considerando tu nivel de actividad moderada."
+            )
         except:
             resultado = "Hubo un error al procesar los datos. Verifica que todos los campos estén completos."
 
@@ -112,7 +143,11 @@ def tmb():
             else:
                 tmb = 10 * peso + 6.25 * altura - 5 * edad - 161
 
-            resultado = f"Tu Tasa Metabólica Basal estimada es {round(tmb)} kcal/día"
+            resultado = (
+                f"Tu Tasa Metabólica Basal estimada es {round(tmb)} kcal/día. "
+                f"Esto representa la energía mínima que tu cuerpo necesita en reposo "
+                f"para mantener funciones vitales como respirar, bombear sangre y regular la temperatura."
+            )
         except:
             resultado = "Hubo un error al procesar los datos. Verifica que todos los campos estén completos."
 
@@ -135,12 +170,21 @@ def peso_ideal():
         else:
             peso_ideal = base
 
-        resultado = f"Tu peso corporal ideal estimado es {round(peso_ideal, 1)} kg"
+        resultado = (
+            f"Tu peso corporal ideal estimado es {round(peso_ideal, 1)} kg. "
+            f"Este valor representa un rango de referencia basado en tu altura y sexo, "
+            f"y se utiliza como guía para mantener un peso saludable. "
+            f"No es un objetivo exacto, sino un punto de orientación para evaluar tu estado físico."
+        )
 
     return render_template('calculadora-de-peso-ideal.html', resultado=resultado)
 
 @app.route('/macros', methods=['GET', 'POST'])
 def macros():
+    if "usuario" not in session:
+        flash("Debes iniciar sesión para acceder a la calculadora de macronutrientes")
+        return redirect(url_for("login"))
+
     resultado = None
     if request.method == 'POST':
         sexo = request.form['sexo']
@@ -166,33 +210,41 @@ def macros():
 
         proteinas = peso * 2  
         grasas = (calorias * 0.25) / 9 
-        carbos = (calorias - (proteinas * 4 + grasas * 9)) / 4 
+        carbos = (calorias - (proteinas * 4 + grasas * 9)) / 4  
 
         resultado = (
-            f"Calorías: {round(calorias)} kcal/día"
-            f"Proteínas: {round(proteinas)} g"
-            f"Grasas: {round(grasas)} g"
-            f"Carbohidratos: {round(carbos)} g"
+            f"Calorías: {round(calorias)} kcal/día\n"
+            f"Proteínas: {round(proteinas)} g\n"
+            f"Grasas: {round(grasas)} g\n"
+            f"Carbohidratos: {round(carbos)} g\n\n"
+            f" Este resultado indica cómo deberías distribuir tus macronutrientes según tu objetivo "
+            f"(mantener, perder o ganar peso). Las calorías son la energía total diaria, las proteínas "
+            f"apoyan la construcción y reparación muscular, las grasas son esenciales para hormonas y "
+            f"funciones vitales, y los carbohidratos son tu principal fuente de energía."
         )
 
-    return render_template('macros.html', resultado=resultado)
+    return render_template('macros.html', resultado=resultado, usuario=session.get('usuario'))
+
 
 @app.route("/an")
 def an():
-    return render_template("analizador.html", resultado=None)
+    if "usuario" not in session:
+        flash("Debes iniciar sesión para acceder al analizador")
+        return redirect(url_for("login"))
+    return render_template("analizador.html", resultado=None, usuario=session.get('usuario'))
 
 @app.route("/analizar", methods=["POST"])
 def analizar():
+    if "usuario" not in session:
+        flash("Debes iniciar sesión para usar el analizador")
+        return redirect(url_for("login"))
+
     receta = request.form.get("receta")
     ingredientes = request.form.get("ingredientes").split(",")
 
     resultado = {
         "receta": receta,
         "ingredientes": [],
-        "sin_gluten": True,
-        "sin_lacteos": True,
-        "es_vegetariana": True,
-        "es_vegana": True
     }
 
     lacteos = ["leche", "queso", "yogur", "mantequilla"]
@@ -217,17 +269,8 @@ def analizar():
 
         resultado["ingredientes"].append({"nombre": nombre, "energia": energia})
 
-    
-        if any(l in ing.lower() for l in lacteos):
-            resultado["sin_lacteos"] = False
-            resultado["es_vegana"] = False
-        if any(g in ing.lower() for g in gluten):
-            resultado["sin_gluten"] = False
-        if any(c in ing.lower() for c in carnes):
-            resultado["es_vegetariana"] = False
-            resultado["es_vegana"] = False
+    return render_template("analizador.html", resultado=resultado, usuario=session.get('usuario'))
 
-    return render_template("analizador.html", resultado=resultado)
 
 RESPUESTAS = {
     "hola": "¡Hola! ¿Cómo estás?",
@@ -244,6 +287,10 @@ RESPUESTAS = {
 
 @app.route("/ia", methods=["GET", "POST"])
 def ia():
+    if "usuario" not in session:
+        flash("Debes iniciar sesión para acceder a la IA")
+        return redirect(url_for("login"))
+
     if "chat" not in session:
         session["chat"] = [("IA", "¡Hola! ¿En qué puedo ayudarte hoy?")]
 
@@ -253,7 +300,8 @@ def ia():
         session["chat"].append(("Tú", pregunta))
         session["chat"].append(("IA", respuesta))
 
-    return render_template("ia.html", chat=session["chat"])
+    return render_template("ia.html", chat=session["chat"], usuario=session.get('usuario'))
+
 
 recetas = [
     {"nombre": "Filete a la plancha", "nivel": "principiante", "tipo": "omnivoro",
@@ -310,6 +358,10 @@ recetas = [
 
 @app.route("/rc", methods=["GET"])
 def recetas_view():
+    if "usuario" not in session:
+        flash("Debes iniciar sesión para acceder a Recetas")
+        return redirect(url_for("login"))
+
     nivel = request.args.get("nivel")
     tipo = request.args.get("tipo")
 
@@ -319,7 +371,9 @@ def recetas_view():
     if tipo and tipo != "":
         filtradas = [r for r in filtradas if r["tipo"] == tipo]
 
-    return render_template("receta.html", recetas=filtradas)
+    return render_template("receta.html", recetas=filtradas, usuario=session.get('usuario'))
+
+
 
 ejercicios = [
     {"nombre": "Sentadillas", "descripcion": "3 series de 15 repeticiones",
@@ -362,13 +416,18 @@ ejercicios = [
 
 @app.route("/ejercicio", methods=["GET"])
 def ejercicio_view():
+    if "usuario" not in session:
+        flash("Debes iniciar sesión para acceder a Ejercicios")
+        return redirect(url_for("login"))
+
     objetivo = request.args.get("objetivo")
 
     filtrados = ejercicios
     if objetivo and objetivo != "":
         filtrados = [e for e in filtrados if e["objetivo"] == objetivo]
 
-    return render_template("ejercicio.html", ejercicios=filtrados)
+    return render_template("ejercicio.html", ejercicios=filtrados, usuario=session.get('usuario'))
+
 
 if __name__ == "__main__":
     app.run(debug=True)
