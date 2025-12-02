@@ -357,7 +357,7 @@ recetas = [
 
 
 @app.route("/rc", methods=["GET"])
-def recetas_view():
+def ver_recetas():
     if "usuario" not in session:
         flash("Debes iniciar sesión para acceder a Recetas")
         return redirect(url_for("login"))
@@ -415,7 +415,7 @@ ejercicios = [
 ]
 
 @app.route("/ejercicio", methods=["GET"])
-def ejercicio_view():
+def ver_ejercicios():
     if "usuario" not in session:
         flash("Debes iniciar sesión para acceder a Ejercicios")
         return redirect(url_for("login"))
